@@ -42,8 +42,10 @@ def process_tempfile(filename: str) -> str:
     return text
 
 
-def write_the_output(found_emails: list):
-    pass
+def write_the_output(found_emails: list, output_file_path: str):
+    with open(output_file_path, "w") as output_file:
+        for email in found_emails:
+            output_file.write(f"{email}\n")
 
 
 def run():
@@ -58,7 +60,7 @@ def run():
 
     text = process_tempfile(temp_file_name)
     emails = re.findall(EMAIL_REGEX, text)
-    print(emails)
+    write_the_output(emails, output_file_path)
 
 
 if __name__ == "__main__":
