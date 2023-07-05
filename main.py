@@ -7,13 +7,14 @@ import cv2
 import pytesseract
 from PIL import Image
 
+from validators import ValidateInputAction, ValidateOutputAction
 from settings import INPUT_DIR, OUTPUT_DIR, PREPROCESS, EMAIL_REGEX
 
 
 def get_fields_from_terminal() -> Tuple[str, str]:
     argParser = argparse.ArgumentParser()
-    argParser.add_argument("-i", "--input",  help="input image", required=True)
-    argParser.add_argument("-o", "--output", help="output document", required=True)
+    argParser.add_argument("-i", "--input",  help="input image", required=True, action=ValidateInputAction)
+    argParser.add_argument("-o", "--output", help="output document", required=True, action=ValidateOutputAction)
     args = argParser.parse_args()
 
     return args.input, args.output
